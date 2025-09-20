@@ -1,3 +1,9 @@
+*{
+	margin: 0px;
+	padding-right: 0px;
+	box-sizing: border-box;
+}
+
 .center {
     position: absolute;
     left: 50%;
