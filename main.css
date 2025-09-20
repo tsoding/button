@@ -13,6 +13,8 @@
     transform: translate(-50%, -50%) scale(0.5, 0.5);
     pointer-events: none;
     text-wrap: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
 }
 #popup {
     visibility: hidden;
