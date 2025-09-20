@@ -33,3 +33,13 @@
     transform: translate(-25%, -50%);
     font-size: 48px;
 }
+.noselect {
+    -webkit-user-select: none;
+    /* Chrome, Safari, Opera */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Standard */
+}
