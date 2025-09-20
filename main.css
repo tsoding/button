@@ -1,0 +1,31 @@
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(4, 4);
+    width: 10%;
+    height: 8%;
+}
+#clickMeText {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.5, 0.5);
+    pointer-events: none;
+    text-wrap: nowrap;
+}
+#popup {
+    visibility: hidden;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 100px;
+    height: 100px;
+}
+#popupText {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+}
