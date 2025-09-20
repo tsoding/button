@@ -8,8 +8,14 @@ const farts = [
 
 function playFart(fart) {
     fart.currentTime = 0;
+    fart.playbackRate = randomPlaybackRate();
+    fart.preservesPitch = false;
     fart.play();
     shaking = true;
+}
+
+function randomPlaybackRate(min = 0.98, max = 1.02) {
+    return Math.random() * (max - min) + min;
 }
 
 const eventsTable = [
