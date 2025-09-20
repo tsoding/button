@@ -131,7 +131,7 @@ for (let fart of farts) {
 // TODO: change it to onmousedown (it stopped working after separating button and label)
 clickMe.onclick = () => {
     counter += 1;
-    popupText.innerText = counter;
+    popupText.innerText = counter + "🍑💨";
     fireEvents();
 };
 
