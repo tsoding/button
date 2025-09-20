@@ -33,3 +33,6 @@
     transform: translate(-25%, -50%);
     font-size: 48px;
 }
+.customCursor {
+    cursor: url("peach-emoji.png"), auto;
+}
