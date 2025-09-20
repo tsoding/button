@@ -1,17 +1,33 @@
 const regularFart = new Audio("fart-83471-fixed-regular.flac");
 const critFart    = new Audio("fart-4-228244-fixed-crit.flac");
+const paulstrechedFart = new Audio("fart-paulstreched.mp3");
 
 const farts = [
     regularFart,
     critFart,
+    paulstrechedFart,
 ];
 
 function playFart(fart) {
+    stopSuspendableAudio();
     fart.currentTime = 0;
     fart.playbackRate = randomPlaybackRate();
     fart.preservesPitch = false;
     fart.play();
     shaking = true;
+}
+
+let suspendedFart = null;
+
+function stopAudioNextClick(fart) {
+    suspendedFart = fart;
+}
+
+function stopSuspendableAudio() {
+    if (suspendedFart === null) return;
+    suspendedFart.pause();
+    suspendedFart.currentTime = 0;
+    suspendedFart = null;
 }
 
 function randomPlaybackRate(min = 0.98, max = 1.02) {
@@ -110,6 +126,22 @@ const eventsTable = [
             playFart(regularFart);
         }
     },
+    {
+        onCount: 100,
+        action: () => {
+            clickMeText.innerText = `HERE COMES THE BIG ONE`
+            playFart(paulstrechedFart);
+            stopAudioNextClick(paulstrechedFart);
+            holdClick(1.0);
+        }
+    },
+    {
+        onCount: 101,
+        action: () => {
+            clickMeText.innerText = `Congrats! You clicked it ${counter} times!`;
+            playFart(regularFart);
+        }
+    },
 ];
 
 eventsTable.sort((a, b) => b.onCount - a.onCount);
@@ -134,8 +166,18 @@ for (let fart of farts) {
     fart.onended = finishFart;
 }
 
+let clickMeBlocked = false;
+
+function holdClick(timeInSeconds) {
+    clickMeBlocked = true;
+    setTimeout(() => {
+        clickMeBlocked = false
+    }, timeInSeconds*1000.0);
+}
+
 // TODO: change it to onmousedown (it stopped working after separating button and label)
 clickMe.onclick = () => {
+    if (clickMeBlocked) return;
     counter += 1;
     popupText.innerText = counter + "🍑💨";
     fireEvents();
