@@ -12,6 +12,7 @@
     width: 10%;
     height: 8%;
 }
+
 #clickMeText {
     position: absolute;
     left: 50%;
@@ -22,6 +23,7 @@
     user-select: none;
     -webkit-user-select: none;
 }
+
 #popup {
     visibility: hidden;
     position: absolute;
@@ -30,6 +32,7 @@
     width: 100px;
     height: 100px;
 }
+
 #popupText {
     display: inline-block;
     white-space: nowrap;
@@ -39,6 +42,7 @@
     transform: translate(-25%, -50%);
     font-size: 48px;
 }
+
 .customCursor {
     cursor: url("peach-emoji.png"), auto;
 }
