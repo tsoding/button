@@ -141,12 +141,11 @@ for (let fart of farts) {
     fart.onended = finishFart;
 }
 
-// TODO: change it to onmousedown (it stopped working after separating button and label)
-clickMe.onclick = () => {
+clickMe.addEventListener('mousedown', () => {
     counter += 1;
     popup.innerText = counter + "🍑💨";
     fireEvents();
-};
+});
 
 function frame() {
     if (shaking) {
