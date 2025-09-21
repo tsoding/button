@@ -39,4 +39,4 @@ Side effects may include:
 ### ⚠️ LEGAL DISCLAIMER ⚠️
 *The management is not responsible for any life-altering revelations, spontaneous enlightenment, or addiction to clicking that may result from using this button. Use responsibly. Button may be habit-forming.*
 
-**© 2024 The Most Amazing Button Corporation LLC - Changing Lives One Click at a Time™**
+**© 2025 The Most Amazing Button Corporation LLC - Changing Lives One Click at a Time™**
