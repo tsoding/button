@@ -51,6 +51,7 @@ const eventsTable = [
         onCount: 10,
         action: () => {
             clickMeText.innerText = `You broke it`;
+            clickMe.style.setProperty('--button-wiggle-amount', '50px');
             playFart(critFart);
         },
     },
@@ -58,6 +59,7 @@ const eventsTable = [
         onCount: 11,
         action: () => {
             clickMeText.innerText = `jk keep going`;
+            clickMe.style.removeProperty('--button-wiggle-amount');
             playFart(regularFart);
         }
     },
@@ -132,6 +134,10 @@ function finishFart() {
     shaking = false;
 }
 
+function random () {
+    return Math.random() * 2 - 1;
+}
+
 for (let fart of farts) {
     fart.onended = finishFart;
 }
@@ -143,24 +149,17 @@ clickMe.onclick = () => {
     fireEvents();
 };
 
-let prevTimestamp = 0;
-function frame(timestamp) {
-    const deltaTime = (timestamp - prevTimestamp)/1000;
-    prevTimestamp = timestamp;
+function frame() {
     if (shaking) {
-        const x = Math.random()*2 - 1 + 50;
-        const y = Math.random()*2 - 1 + 50;
-        clickMe.style.left = `${x}%`;
-        clickMe.style.top  = `${y}%`;
+        clickMe.style.setProperty('--button-offset-x', random());
+        clickMe.style.setProperty('--button-offset-y', random());
     } else {
-        clickMe.style.left = "50%";
-        clickMe.style.top  = "50%";
+        clickMe.style.removeProperty('--button-offset-x');
+        clickMe.style.removeProperty('--button-offset-y');
     }
+
     window.requestAnimationFrame(frame);
 }
-window.requestAnimationFrame((timestamp) => {
-    prevTimestamp = timestamp;
-    window.requestAnimationFrame(frame);
-});
+window.requestAnimationFrame(frame);
 
 fireEvents();

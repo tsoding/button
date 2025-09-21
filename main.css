@@ -1,21 +1,30 @@
-.center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(4, 4);
-    width: 10%;
-    height: 8%;
+:root {
+    --button-wiggle-amount: 10px;
 }
+
+#clickMe {
+    --button-wiggle-x: calc(var(--button-offset-x, 0) * var(--button-wiggle-amount));
+    --button-wiggle-y: calc(var(--button-offset-y, 0) * var(--button-wiggle-amount));
+
+    position: absolute;
+    top: calc(50% + var(--button-wiggle-y));
+    left: calc(50% + var(--button-wiggle-x));
+    transform: translate(-50%, -50%);
+
+    font-size: clamp(1.5rem, 5vw, 3rem);
+
+    min-width: 50ch;
+    padding: 1ch 1ch;
+    height: 8ch;
+}
+
 #clickMeText {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0.5, 0.5);
-    pointer-events: none;
-    text-wrap: nowrap;
-    user-select: none;
-    -webkit-user-select: none;
+    transform: translate(
+        calc(-1 * var(--button-wiggle-x)),
+        calc(-1 * var(--button-wiggle-y))
+    );
 }
+
 #popup {
     font-size: 4rem;
     visibility: hidden;
