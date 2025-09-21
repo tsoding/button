@@ -43,7 +43,7 @@ const eventsTable = [
         onCount: 6,
         action: () => {
             clickMeText.innerText = `Oh, you're into that...`;
-            popupText.style.visibility = "visible";
+            popup.style.visibility = "visible";
             playFart(regularFart);
         },
     },
@@ -139,7 +139,7 @@ for (let fart of farts) {
 // TODO: change it to onmousedown (it stopped working after separating button and label)
 clickMe.onclick = () => {
     counter += 1;
-    popupText.innerText = counter + "🍑💨";
+    popup.innerText = counter + "🍑💨";
     fireEvents();
 };
 
