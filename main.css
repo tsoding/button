@@ -1,38 +1,39 @@
 .center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(4, 4);
-    width: 10%;
-    height: 8%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(4, 4);
+  width: 10%;
+  height: 8%;
 }
 #clickMeText {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0.5, 0.5);
-    pointer-events: none;
-    text-wrap: nowrap;
-    user-select: none;
-    -webkit-user-select: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.5, 0.5);
+  pointer-events: none;
+  text-wrap: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
 }
 #popup {
-    visibility: hidden;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    width: 100px;
-    height: 100px;
+  visibility: hidden;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 100px;
+  height: 100px;
 }
 #popupText {
-    display: inline-block;
-    white-space: nowrap;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-25%, -50%);
-    font-size: 48px;
+  display: inline-block;
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-25%, -50%);
+  font-size: 48px;
+  user-select: none;
 }
 .customCursor {
-    cursor: url("peach-emoji.png"), auto;
+  cursor: url("peach-emoji.png"), auto;
 }
