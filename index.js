@@ -49,7 +49,7 @@ const eventsTable = [
     {
         onCount: 10,
         action: () => {
-            clickMeText.innerText = `You broke it`;
+            clickMeText.innerText = "You broke it";
             clickMe.style.setProperty('--button-wiggle-amount', '50px');
             playFart(critFart);
         },
@@ -57,7 +57,7 @@ const eventsTable = [
     {
         onCount: 11,
         action: () => {
-            clickMeText.innerText = `jk keep going`;
+            clickMeText.innerText = "jk keep going";
             clickMe.style.removeProperty('--button-wiggle-amount');
             playFart(regularFart);
         }
@@ -65,7 +65,7 @@ const eventsTable = [
     {
         onCount: 15,
         action: () => {
-            clickMeText.innerText = `having fun?`;
+            clickMeText.innerText = "having fun?";
             clickMeWrapper.classList.add("customCursor");
             clickMe.classList.add("customCursor");
             playFart(regularFart);
@@ -74,21 +74,21 @@ const eventsTable = [
     {
         onCount: 20,
         action: () => {
-            clickMeText.innerText = `dude this is just a fart button`;
+            clickMeText.innerText = "dude this is just a fart button";
             playFart(regularFart);
         }
     },
     {
         onCount: 30,
         action: () => {
-            clickMeText.innerText = `it doesn't do anything, but farts`;
+            clickMeText.innerText = "it doesn't do anything, but farts";
             playFart(regularFart);
         }
     },
     {
         onCount: 40,
         action: () => {
-            clickMeText.innerText = `you are not getting anything for clicking it`;
+            clickMeText.innerText = "you are not getting anything for clicking it";
             playFart(regularFart);
         }
     },
@@ -102,7 +102,7 @@ const eventsTable = [
     {
         onCount: 69,
         action: () => {
-            clickMeText.innerText = `Nice!`;
+            clickMeText.innerText = "Nice!";
             playFart(regularFart);
         }
     },
