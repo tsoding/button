@@ -1,5 +1,7 @@
 const regularFart = new Audio("fart-83471-fixed-regular.flac");
 const critFart    = new Audio("fart-4-228244-fixed-crit.flac");
+const button = document.getElementById("button");
+const popup = document.getElementById("popup");
 
 const farts = [
     regularFart,
@@ -22,93 +24,92 @@ const eventsTable = [
     {
         onCount: 0,
         action: () => {
-            clickMeText.innerText = "Click me!";
+            button.innerText = "Click me!";
         }
     },
     {
         onCount: 1,
         action: () => {
-            clickMeText.innerText = "Gotchu!!";
+            button.innerText = "Gotchu!!";
             playFart(regularFart);
         }
     },
     {
         onCount: 4,
         action: () => {
-            clickMeText.innerText = "Oh, you're into that...";
+            button.innerText = "Oh, you're into that...";
             playFart(regularFart);
         },
     },
     {
         onCount: 6,
         action: () => {
-            clickMeText.innerText = `Oh, you're into that...`;
-            popupText.style.visibility = "visible";
+            button.innerText = `Oh, you're into that...`;
+	    popup.style.visibility = "visible";
             playFart(regularFart);
         },
     },
     {
         onCount: 10,
         action: () => {
-            clickMeText.innerText = `You broke it`;
+            button.innerText = `You broke it`;
             playFart(critFart);
         },
     },
     {
         onCount: 11,
         action: () => {
-            clickMeText.innerText = `jk keep going`;
+            button.innerText = `jk keep going`;
             playFart(regularFart);
         }
     },
     {
         onCount: 15,
         action: () => {
-            clickMeText.innerText = `having fun?`;
-            clickMeWrapper.classList.add("customCursor");
-            clickMe.classList.add("customCursor");
-            playFart(regularFart);
+            button.innerText = `having fun?`;
+            button.classList.add("customCursor");
+	playFart(regularFart);
         }
     },
     {
         onCount: 20,
         action: () => {
-            clickMeText.innerText = `dude this is just a fart button`;
+            button.innerText = `dude this is just a fart button`;
             playFart(regularFart);
         }
     },
     {
         onCount: 30,
         action: () => {
-            clickMeText.innerText = `it doesn't do anything, but farts`;
+            button.innerText = `it doesn't do anything, but farts`;
             playFart(regularFart);
         }
     },
     {
         onCount: 40,
         action: () => {
-            clickMeText.innerText = `you are not getting anything for clicking it`;
+            button.innerText = `you are not getting anything for clicking it`;
             playFart(regularFart);
         }
     },
     {
         onCount: 50,
         action: () => {
-            clickMeText.innerText = `Congrats! You clicked it ${counter} times!`;
+            button.innerText = `Congrats! You clicked it ${counter} times!`;
             playFart(regularFart);
         }
     },
     {
         onCount: 69,
         action: () => {
-            clickMeText.innerText = `Nice!`;
+            button.innerText = `Nice!`;
             playFart(regularFart);
         }
     },
     {
         onCount: 70,
         action: () => {
-            clickMeText.innerText = `Congrats! You clicked it ${counter} times!`;
+            button.innerText = `Congrats! You clicked it ${counter} times!`;
             playFart(regularFart);
         }
     },
@@ -137,7 +138,7 @@ for (let fart of farts) {
 }
 
 // TODO: change it to onmousedown (it stopped working after separating button and label)
-clickMe.onclick = () => {
+button.onclick = () => {
     counter += 1;
     popupText.innerText = counter + "🍑💨";
     fireEvents();
