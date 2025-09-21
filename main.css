@@ -1,3 +1,6 @@
+body {
+  margin: 0;
+}
 .center {
     position: absolute;
     left: 50%;
@@ -15,6 +18,13 @@
     text-wrap: nowrap;
     user-select: none;
     -webkit-user-select: none;
+}
+#critImg {
+  opacity: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 #popup {
     visibility: hidden;

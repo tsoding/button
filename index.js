@@ -52,6 +52,14 @@ const eventsTable = [
         action: () => {
             clickMeText.innerText = `You broke it`;
             playFart(critFart);
+            critImg.animate([
+                { opacity: 0 },
+                { opacity: 1 },
+                { opacity: 0 }
+            ], {
+                duration: 1000,
+                fill: "forwards"
+            });
         },
     },
     {
