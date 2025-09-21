@@ -138,7 +138,7 @@ function random () {
 }
 
 for (let fart of farts) {
-    fart.onended = finishFart;
+    fart.addEventListener('ended', finishFart);
 }
 
 clickMe.addEventListener('mousedown', () => {
