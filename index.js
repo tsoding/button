@@ -42,7 +42,6 @@ const eventsTable = [
     {
         onCount: 6,
         action: () => {
-            clickMeText.innerText = `Oh, you're into that...`;
             popup.style.visibility = "visible";
             playFart(regularFart);
         },
