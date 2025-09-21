@@ -6,6 +6,7 @@
     width: 10%;
     height: 8%;
 }
+
 #clickMeText {
     position: absolute;
     left: 50%;
@@ -23,6 +24,7 @@
     top: 10px;
     width: 100px;
     height: 100px;
+    user-select: none;
 }
 #popupText {
     display: inline-block;
