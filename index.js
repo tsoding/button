@@ -148,11 +148,11 @@ function frame(timestamp) {
 	if (shaking) {
 		const x = Math.random() * 2 - 1 + 50;
 		const y = Math.random() * 2 - 1 + 50;
-		clickMe.style.left = `${x}%`;
-		clickMe.style.top = `${y}%`;
+		button.style.left = `${x}%`;
+		button.style.top = `${y}%`;
 	} else {
-		clickMe.style.left = "50%";
-		clickMe.style.top = "50%";
+		button.style.left = "50%";
+		button.style.top = "50%";
 	}
 	window.requestAnimationFrame(frame);
 }
