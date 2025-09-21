@@ -17,6 +17,9 @@
     min-width: 50ch;
     padding: 1ch 1ch;
     height: 8ch;
+
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 #clickMeText {
@@ -29,6 +32,8 @@
 #popup {
     font-size: var(--font-size);
     visibility: hidden;
+    user-select: none;
+    -webkit-user-select: none;
 }
 .customCursor {
     cursor: url("peach-emoji.png"), auto;
