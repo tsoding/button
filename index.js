@@ -1,11 +1,11 @@
 const regularFart = new Audio("fart-83471-fixed-regular.flac");
 const critFart    = new Audio("fart-4-228244-fixed-crit.flac");
-const paulstrechedFart = new Audio("fart-paulstreched.mp3");
+const paulstretchedFart = new Audio("fart-paulstretched.flac");
 
 const farts = [
     regularFart,
     critFart,
-    paulstrechedFart,
+    paulstretchedFart,
 ];
 
 function playFart(fart) {
@@ -132,8 +132,8 @@ const eventsTable = [
         onCount: 100,
         action: () => {
             clickMeText.innerText = `HERE COMES THE BIG ONE`
-            playFart(paulstrechedFart);
-            stopAudioNextClick(paulstrechedFart);
+            playFart(paulstretchedFart);
+            stopAudioNextClick(paulstretchedFart);
             holdClick(1.0);
         }
     },
@@ -168,18 +168,15 @@ for (let fart of farts) {
     fart.onended = finishFart;
 }
 
-let clickMeBlocked = false;
-
 function holdClick(timeInSeconds) {
-    clickMeBlocked = true;
+    clickMe.disabled = true;
     setTimeout(() => {
-        clickMeBlocked = false
+        clickMe.disabled = false;
     }, timeInSeconds*1000.0);
 }
 
 // TODO: change it to onmousedown (it stopped working after separating button and label)
 clickMe.onclick = () => {
-    if (clickMeBlocked) return;
     counter += 1;
     popupText.innerText = counter + "🍑💨";
     fireEvents();
