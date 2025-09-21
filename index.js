@@ -112,6 +112,22 @@ const eventsTable = [
             playFart(regularFart);
         }
     },
+    {
+        onCount: 100,
+        action: () => {
+            clickMeText.innerText = `Congrats! You unclocked the dark theme! Keep Going!`;
+            playFart(regularFart);
+            document.body.style.backgroundColor = "#121212";
+            popupText.style.color = "#FFFFFF";
+        }
+    },
+    {
+        onCount: 100,
+        action: () => {
+            clickMeText.innerText = `Congrats! You clicked it ${counter} times!`;
+            playFart(regularFart);
+        }
+    },
 ];
 
 eventsTable.sort((a, b) => b.onCount - a.onCount);
