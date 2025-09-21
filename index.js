@@ -136,8 +136,8 @@ for (let fart of farts) {
     fart.onended = finishFart;
 }
 
-// TODO: change it to onmousedown (it stopped working after separating button and label)
-clickMe.onclick = () => {
+clickMeWrapper.onmousedown = (e) => {
+    e.preventDefault();
     counter += 1;
     popupText.innerText = counter + "🍑💨";
     fireEvents();
