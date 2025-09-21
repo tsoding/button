@@ -6,10 +6,13 @@ const farts = [
     critFart,
 ];
 
-function playFart(fart) {
+function playFart(fart, endedCallback = null) {
     fart.currentTime = 0;
     fart.playbackRate = randomPlaybackRate();
     fart.preservesPitch = false;
+    if (typeof endedCallback === 'function') {
+        fart.addEventListener('ended', endedCallback);
+    }
     fart.play();
     shaking = true;
 }
@@ -51,14 +54,15 @@ const eventsTable = [
         action: () => {
             clickMeText.innerText = "You broke it";
             clickMe.style.setProperty('--button-wiggle-amount', '50px');
-            playFart(critFart);
+            playFart(critFart, () => {
+                clickMe.style.removeProperty('--button-wiggle-amount');
+            });
         },
     },
     {
         onCount: 11,
         action: () => {
             clickMeText.innerText = "jk keep going";
-            clickMe.style.removeProperty('--button-wiggle-amount');
             playFart(regularFart);
         }
     },
