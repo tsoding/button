@@ -13,6 +13,8 @@
     transform: translate(-50%, -50%) scale(0.5, 0.5);
     pointer-events: none;
     text-wrap: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
 }
 #popup {
     visibility: hidden;
@@ -30,4 +32,7 @@
     top: 50%;
     transform: translate(-25%, -50%);
     font-size: 48px;
+}
+.customCursor {
+    cursor: url("peach-emoji.png"), auto;
 }

@@ -81,6 +81,8 @@ const eventsTable = [
         onCount: 15,
         action: () => {
             clickMeText.innerText = `having fun?`;
+            clickMeWrapper.classList.add("customCursor");
+            clickMe.classList.add("customCursor");
             playFart(regularFart);
         }
     },
