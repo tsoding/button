@@ -70,6 +70,14 @@ const eventsTable = [
             clickMe.disabled = true;
             clickMeText.innerText = `You broke it`;
             playFart(critFart);
+            critImg.animate([
+                { opacity: 0 },
+                { opacity: 1 },
+                { opacity: 0 }
+            ], {
+                duration: 1000,
+                fill: "forwards"
+            });
         },
     },
     {
@@ -116,6 +124,7 @@ const eventsTable = [
     {
         onCount: 69,
         action: () => {
+            // TODO: add this sound here https://www.youtube.com/watch?v=3WAOxKOmR90
             clickMe.disabled = true;
             clickMeText.innerText = `Nice!`;
             playFart(critFart);
@@ -129,7 +138,17 @@ const eventsTable = [
         onCount: 100,
         action: () => {
             clickMe.disabled = true;
-            setTimeout(() => clickMe.disabled = false, 3000);
+            setTimeout(() => {
+                clickMe.disabled = false;
+                critImg.animate([
+                    { opacity: 0 },
+                    { opacity: 1 },
+                    { opacity: 0 }
+                ], {
+                    duration: 1000,
+                    fill: "forwards"
+                });
+            }, 3000);
             clickMeText.innerText = `HERE COMES THE BIG ONE`;
             playFart(bigoneFart);
         }
