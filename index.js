@@ -11,6 +11,15 @@ function newFart(url) {
     return fart;
 }
 
+function randomColor() {
+  const hexnum = '0123456789ABCDEF';
+  let color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += hexnum[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 const regularFart = newFart("fart-83471-fixed-regular.flac");
 const critFart    = newFart("fart-4-228244-fixed-crit.flac");
 const bigoneFart  = newFart("fart-paulstretched.flac");
@@ -107,6 +116,9 @@ const eventsTable = [
         onCount: 30,
         action: () => {
             clickMeText.innerText = `it doesn't do anything, but farts`;
+            body.style.background   = randomColor();
+            body.style.color        = randomColor();
+            clickMeText.style.color = randomColor();
             playFart(regularFart, true);
         }
     },
