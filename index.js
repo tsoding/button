@@ -173,7 +173,8 @@ function fireEvents() {
 let shaking = false;
 let counter = 0;               // TODO: DONT FORGET TO SET TO 0 ON RELEASE!!!
 
-clickMeWrapper.onmousedown = (e) => {
+// TODO: change it to onmousedown (it stopped working after separating button and label)
+clickMe.onclick = () => {
     counter += 1;
     popupText.innerText = counter + "🍑💨";
     fireEvents();
