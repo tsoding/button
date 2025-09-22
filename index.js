@@ -1,5 +1,8 @@
 const regularFart = new Audio("fart-83471-fixed-regular.flac");
 const critFart    = new Audio("fart-4-228244-fixed-crit.flac");
+const STORAGE_KEY = "@button:"
+
+let canPlaySound = true;
 
 const farts = [
     regularFart,
@@ -7,6 +10,7 @@ const farts = [
 ];
 
 function playFart(fart) {
+    if (!canPlaySound) return;
     fart.currentTime = 0;
     fart.playbackRate = randomPlaybackRate();
     fart.preservesPitch = false;
@@ -125,8 +129,23 @@ function fireEvents() {
     }
 }
 
+function initializeButton() {
+    canPlaySound = false;
+    for (const event of eventsTable.reverse()) {
+        if (event.onCount > counter) {
+            break;
+        }
+        
+        event.action();
+    }
+
+    eventsTable.reverse();
+    canPlaySound = true;
+}
+
+
 let shaking = false;
-let counter = 0;               // TODO: DONT FORGET TO SET TO 0 ON RELEASE!!!
+let counter = Number(localStorage.getItem(`${STORAGE_KEY}counter`)) || 0;
 
 function finishFart() {
     shaking = false;
@@ -136,11 +155,16 @@ for (let fart of farts) {
     fart.onended = finishFart;
 }
 
+function updatePopup() {
+    popupText.innerText = counter + "🍑💨";
+}
+
 // TODO: change it to onmousedown (it stopped working after separating button and label)
 clickMe.onclick = () => {
     counter += 1;
-    popupText.innerText = counter + "🍑💨";
+    localStorage.setItem(`${STORAGE_KEY}counter`, counter);
     fireEvents();
+    updatePopup();
 };
 
 let prevTimestamp = 0;
@@ -163,4 +187,5 @@ window.requestAnimationFrame((timestamp) => {
     window.requestAnimationFrame(frame);
 });
 
-fireEvents();
+initializeButton();
+updatePopup();
