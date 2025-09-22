@@ -1,21 +1,38 @@
-const regularFart = new Audio("fart-83471-fixed-regular.flac");
-const critFart    = new Audio("fart-4-228244-fixed-crit.flac");
+const farts = [];
 
-const farts = [
-    regularFart,
-    critFart,
-];
-
-function playFart(fart) {
-    fart.currentTime = 0;
-    fart.playbackRate = randomPlaybackRate();
+function newFart(url) {
+    const fart = new Audio(url);
     fart.preservesPitch = false;
+    fart.onended = () => {
+        shaking = false;
+        clickMe.disabled = false;
+    };
+    farts.push(fart);
+    return fart;
+}
+
+const regularFart = newFart("fart-83471-fixed-regular.flac");
+const critFart    = newFart("fart-4-228244-fixed-crit.flac");
+const bigoneFart  = newFart("fart-paulstretched.flac");
+
+function randomPlaybackRate(min = 0.97, max = 1.03) {
+    return Math.random() * (max - min) + min;
+}
+
+function playFart(fart, randomPitch) {
+    for (const f of farts) {
+        f.pause();
+        f.currentTime = 0;
+    }
+
+    fart.playbackRate = randomPitch ? randomPlaybackRate() : 1;
     fart.play();
     shaking = true;
 }
 
-function randomPlaybackRate(min = 0.98, max = 1.02) {
-    return Math.random() * (max - min) + min;
+const regularAction = () => {
+    clickMeText.innerText = `Congrats! You clicked it ${counter} times!`;
+    playFart(regularFart, true);
 }
 
 const eventsTable = [
@@ -29,14 +46,14 @@ const eventsTable = [
         onCount: 1,
         action: () => {
             clickMeText.innerText = "Gotchu!!";
-            playFart(regularFart);
+            playFart(regularFart, true);
         }
     },
     {
         onCount: 4,
         action: () => {
             clickMeText.innerText = "Oh, you're into that...";
-            playFart(regularFart);
+            playFart(regularFart, true);
         },
     },
     {
@@ -44,12 +61,13 @@ const eventsTable = [
         action: () => {
             clickMeText.innerText = `Oh, you're into that...`;
             popupText.style.visibility = "visible";
-            playFart(regularFart);
+            playFart(regularFart, true);
         },
     },
     {
         onCount: 10,
         action: () => {
+            clickMe.disabled = true;
             clickMeText.innerText = `You broke it`;
             playFart(critFart);
             critImg.animate([
@@ -66,7 +84,7 @@ const eventsTable = [
         onCount: 11,
         action: () => {
             clickMeText.innerText = `jk keep going`;
-            playFart(regularFart);
+            playFart(regularFart, true);
         }
     },
     {
@@ -75,51 +93,59 @@ const eventsTable = [
             clickMeText.innerText = `having fun?`;
             clickMeWrapper.classList.add("customCursor");
             clickMe.classList.add("customCursor");
-            playFart(regularFart);
+            playFart(regularFart, true);
         }
     },
     {
         onCount: 20,
         action: () => {
             clickMeText.innerText = `dude this is just a fart button`;
-            playFart(regularFart);
+            playFart(regularFart, true);
         }
     },
     {
         onCount: 30,
         action: () => {
             clickMeText.innerText = `it doesn't do anything, but farts`;
-            playFart(regularFart);
+            playFart(regularFart, true);
         }
     },
     {
         onCount: 40,
         action: () => {
             clickMeText.innerText = `you are not getting anything for clicking it`;
-            playFart(regularFart);
+            playFart(regularFart, true);
         }
     },
     {
         onCount: 50,
-        action: () => {
-            clickMeText.innerText = `Congrats! You clicked it ${counter} times!`;
-            playFart(regularFart);
-        }
+        action: regularAction,
     },
     {
         onCount: 69,
         action: () => {
+            clickMe.disabled = true;
             clickMeText.innerText = `Nice!`;
-            playFart(regularFart);
+            playFart(critFart);
         }
     },
     {
         onCount: 70,
+        action: regularAction,
+    },
+    {
+        onCount: 100,
         action: () => {
-            clickMeText.innerText = `Congrats! You clicked it ${counter} times!`;
-            playFart(regularFart);
+            clickMe.disabled = true;
+            setTimeout(() => clickMe.disabled = false, 3000);
+            clickMeText.innerText = `HERE COMES THE BIG ONE`;
+            playFart(bigoneFart);
         }
     },
+    {
+        onCount: 101,
+        action: regularAction,
+    }
 ];
 
 eventsTable.sort((a, b) => b.onCount - a.onCount);
@@ -135,14 +161,6 @@ function fireEvents() {
 
 let shaking = false;
 let counter = 0;               // TODO: DONT FORGET TO SET TO 0 ON RELEASE!!!
-
-function finishFart() {
-    shaking = false;
-}
-
-for (let fart of farts) {
-    fart.onended = finishFart;
-}
 
 // TODO: change it to onmousedown (it stopped working after separating button and label)
 clickMe.onclick = () => {
