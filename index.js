@@ -180,10 +180,7 @@ clickMe.onclick = () => {
     fireEvents();
 };
 
-let prevTimestamp = 0;
-function frame(timestamp) {
-    const deltaTime = (timestamp - prevTimestamp)/1000;
-    prevTimestamp = timestamp;
+function frame() {
     if (shaking) {
         const x = Math.random()*2 - 1 + 50;
         const y = Math.random()*2 - 1 + 50;
@@ -195,9 +192,7 @@ function frame(timestamp) {
     }
     window.requestAnimationFrame(frame);
 }
-window.requestAnimationFrame((timestamp) => {
-    prevTimestamp = timestamp;
-    window.requestAnimationFrame(frame);
-});
+
+window.requestAnimationFrame(frame);
 
 fireEvents();
