@@ -130,7 +130,6 @@ function fireEvents() {
 }
 
 function initializeButton() {
-    debugger
     canPlaySound = false;
     for (const event of eventsTable.reverse()) {
         if (event.onCount > counter) {
