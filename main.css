@@ -42,6 +42,7 @@ body {
     top: 50%;
     transform: translate(-25%, -50%);
     font-size: 48px;
+    user-select: none;
 }
 .customCursor {
     cursor: url("peach-emoji.png"), auto;
