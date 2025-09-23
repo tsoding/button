@@ -30,6 +30,53 @@ function playFart(fart, randomPitch) {
     shaking = true;
 }
 
+function emitParticles(pos) {
+    let clickMeRect = clickMeText.getBoundingClientRect();
+    console.log("rect", clickMeRect);
+    function rand(multiplier) {
+        return (Math.random() - 0.5) * multiplier;
+    }
+    function createBlock(pos, w, h, color) {
+        var block = document.createElement("div");
+        block.style.position = "absolute";
+        block.style.left = pos.x + "px";
+        block.style.top = pos.y + "px";
+        block.style.width = w + "px";
+        block.style.height = h + "px";
+        block.style.backgroundColor = color;
+        block.style.borderRadius = "50%";
+        block.style.pointerEvents = "none";
+        document.body.appendChild(block);
+        return block;
+    }
+    let blocks = [
+        createBlock(pos, 35, 35, "#572C25"),
+        createBlock({ x: pos.x + rand(30), y: pos.y + rand(30) }, 30, 30, "#692A22"),
+        createBlock({ x: pos.x + rand(30), y: pos.y + rand(30) }, 30, 30, "#662C24"),
+        createBlock({ x: pos.x + rand(30), y: pos.y + rand(30) }, 20, 20, "#572A22"),
+        createBlock({ x: pos.x + rand(30), y: pos.y + rand(30) }, 20, 20, "#672115"),
+        createBlock({ x: pos.x + rand(30), y: pos.y + rand(30) }, 15, 15, "#572A22"),
+        createBlock({ x: pos.x + rand(30), y: pos.y + rand(30) }, 10, 10, "#692A22"),
+        createBlock({ x: pos.x + rand(30), y: pos.y + rand(30) }, 10, 10, "#662C24"),
+    ];
+
+    blocks.forEach((block) => {
+        const blockSpinning = [
+            { opacity: 1, transform: "translateX(0) translateY(0)" },
+            { opacity: 0, transform: `translateX(${rand(50)}px) translateY(${rand(50)}px)` },
+        ];
+
+        const blockTiming = {
+            duration: 270,
+            iterations: 1,
+        };
+        let anim = block.animate(blockSpinning, blockTiming);
+        anim.addEventListener("finish", () => {
+            block.remove();
+        });
+    });
+}
+
 const regularAction = () => {
     clickMeText.innerText = `Congrats! You clicked it ${counter} times!`;
     playFart(regularFart, true);
@@ -180,10 +227,11 @@ let shaking = false;
 let counter = 0;               // TODO: DONT FORGET TO SET TO 0 ON RELEASE!!!
 
 // TODO: change it to onmousedown (it stopped working after separating button and label)
-clickMe.onclick = () => {
+clickMe.onclick = (e) => {
     counter += 1;
     popupText.innerText = counter + "🍑💨";
     fireEvents();
+    emitParticles({x: e.clientX, y: e.clientY}); 
 };
 
 let prevTimestamp = 0;
