@@ -35,6 +35,12 @@ const regularAction = () => {
     playFart(regularFart, true);
 }
 
+const thatsItForNow = () => {
+    clickMeText.innerHTML = `That's it for now!`;
+    playFart(regularFart, true);
+    contrib.style.visibility = "visible";
+}
+
 const eventsTable = [
     {
         onCount: 0,
@@ -155,7 +161,7 @@ const eventsTable = [
     },
     {
         onCount: 101,
-        action: regularAction,
+        action: thatsItForNow,
     }
 ];
 

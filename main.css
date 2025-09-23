@@ -26,6 +26,13 @@ body {
   width: 100%;
   object-fit: cover;
 }
+#contrib {
+    visibility: hidden;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+}
 #popup {
     visibility: hidden;
     position: absolute;
