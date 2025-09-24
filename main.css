@@ -96,6 +96,19 @@ body {
     cursor: url("peach-emoji.png"), auto;
 }
 
+#clickMeText.rotateText {
+    animation: spinInPlace 0.6s linear infinite;
+}
+
+@keyframes spinInPlace {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5, 0.5) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.5, 0.5) rotate(360deg);
+    }
+}
+
 /* theme */
 .nav {
     position: absolute;

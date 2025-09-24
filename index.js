@@ -22,6 +22,7 @@ function newFart(url) {
 const regularFart = newFart("fart-83471-fixed-regular.flac");
 const critFart    = newFart("fart-4-228244-fixed-crit.flac");
 const bigoneFart  = newFart("fart-paulstretched.flac");
+const evilFart    = newFart("fart-paulstretched-evil.flac");
 
 function randomPlaybackRate(min = 0.97, max = 1.03) {
     return Math.random() * (max - min) + min;
@@ -169,8 +170,50 @@ const eventsTable = [
     },
     {
         onCount: 101,
+        action: regularAction,
+    },
+    {
+        onCount: 120,
+        action: () => {
+            clickMe.disabled = true;
+
+            clickMeText.innerText = "fart flip!!!!";
+            clickMeText.classList.add("rotateText");
+
+            playFart(critFart, true);
+            setTimeout(() => {
+                clickMeText.classList.remove("rotateText");
+                clickMe.disabled = false;
+            }, 600);
+        }
+    },
+    {
+        onCount: 121,
+        action: regularAction,
+    },
+    {
+        onCount: 666,
+        action: () => {
+            clickMe.disabled = true;
+            setTimeout(() => {
+                clickMe.disabled = false;
+                critImg.animate([
+                    { opacity: 0 },
+                    { opacity: 1 },
+                    { opacity: 0 }
+                ], {
+                    duration: 1000,
+                    fill: "forwards"
+                });
+            }, 3000);
+            clickMeText.innerText = `😈 BE A SMART FELLA \n NOT A FART SMELLA 😈`;
+            playFart(evilFart);
+        }
+    },
+    {
+        onCount: 667,
         action: thatsItForNow,
-    }
+    },
 ];
 
 eventsTable.sort((a, b) => b.onCount - a.onCount);
