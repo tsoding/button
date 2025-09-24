@@ -165,6 +165,25 @@ const eventsTable = [
         action: regularAction,
     },
     {
+        onCount: 120,
+        action: () => {
+            clickMe.disabled = true;
+
+            clickMeText.innerText = "fart flip!!!!";
+            clickMeText.classList.add("rotateText");
+
+            playFart(critFart, true);
+            setTimeout(() => {
+                clickMeText.classList.remove("rotateText");
+                clickMe.disabled = false;
+            }, 600);
+        }
+    },
+    {
+        onCount: 121,
+        action: regularAction,
+    },
+    {
         onCount: 666,
         action: () => {
             clickMe.disabled = true;
@@ -186,7 +205,7 @@ const eventsTable = [
     {
         onCount: 667,
         action: thatsItForNow,
-    }
+    },
 ];
 
 eventsTable.sort((a, b) => b.onCount - a.onCount);
