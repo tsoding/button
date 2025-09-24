@@ -1,4 +1,12 @@
+const clickMe = document.getElementById("clickMe")
+const root = document.documentElement;
+const theme = document.querySelector('.theme')
 const farts = [];
+
+function handleTheme() {
+    const currentTheme = localStorage.getItem('theme') ?? '';
+    root.className = currentTheme;
+}
 
 function newFart(url) {
     const fart = new Audio(url);
@@ -179,14 +187,30 @@ function fireEvents() {
 let shaking = false;
 let counter = 0;               // TODO: DONT FORGET TO SET TO 0 ON RELEASE!!!
 
+
+clickMe.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && event.repeat) {
+        event.preventDefault()
+        return;
+    }
+}) 
 // TODO: change it to onmousedown (it stopped working after separating button and label)
-clickMe.onclick = () => {
+clickMe.addEventListener('click', () => {
     counter += 1;
     popupText.innerText = counter + "🍑💨";
     fireEvents();
-};
+}) 
+
+
+theme.addEventListener('click', (e) => {
+    root.className = e.target.id
+    localStorage.setItem('theme', e.target.id)
+})
+
+
 
 let prevTimestamp = 0;
+
 function frame(timestamp) {
     const deltaTime = (timestamp - prevTimestamp)/1000;
     prevTimestamp = timestamp;
@@ -199,11 +223,15 @@ function frame(timestamp) {
         clickMe.style.left = "50%";
         clickMe.style.top  = "50%";
     }
-    window.requestAnimationFrame(frame);
+    requestAnimationFrame(frame);
 }
-window.requestAnimationFrame((timestamp) => {
+
+requestAnimationFrame((timestamp) => {
     prevTimestamp = timestamp;
-    window.requestAnimationFrame(frame);
+    requestAnimationFrame(frame);
 });
 
-fireEvents();
+;(() => {
+    handleTheme();
+    fireEvents();
+})();

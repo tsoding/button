@@ -1,6 +1,31 @@
+:root {
+  --bg-color: #ffffff;
+  --bg-color-2: #ededed;
+  --bg-hover-color: #dbdbdb;
+  --font-color: #151515;
+  --border-color: #86868657;
+}
+:root.dark {
+  --bg-color: #0d1117;
+  --bg-color-2: #181e29;
+  --bg-hover-color: #141922;
+  --font-color: #EEF1F3;
+  --border-color: #30363d;
+}
+:root.poop {
+  --bg-color: #4f3324;
+  --bg-color-2: #754809;
+  --bg-hover-color: #4c4535;
+  --font-color: #b8b6b3;
+  --border-color: #2b1605;
+}
+
+
 body {
+  background-color: var(--bg-color);
   margin: 0;
 }
+
 .center {
     position: absolute;
     left: 50%;
@@ -9,6 +34,19 @@ body {
     width: 10%;
     height: 8%;
 }
+
+#clickMe {
+    background-color: var(--bg-color-2);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+
+}
+
+#clickMe:hover {
+    background-color: var(--bg-hover-color);
+}
+
+
 #clickMeText {
     position: absolute;
     left: 50%;
@@ -18,6 +56,7 @@ body {
     text-wrap: nowrap;
     user-select: none;
     -webkit-user-select: none;
+    color: var(--font-color)
 }
 #critImg {
   opacity: 0;
@@ -40,6 +79,7 @@ body {
     top: 10px;
     width: 100px;
     height: 100px;
+    background-color: var(--bg-color);
 }
 #popupText {
     display: inline-block;
@@ -50,7 +90,59 @@ body {
     transform: translate(-25%, -50%);
     font-size: 48px;
     user-select: none;
+    color: var(--font-color)
 }
 .customCursor {
     cursor: url("peach-emoji.png"), auto;
+}
+
+/* theme */
+.nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#night-mode-btn {
+    anchor-name: --anchor-dark-mode;
+}
+.nav-btn-style {
+    background: var(--bg-color-2);
+    border: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 7px;
+    font-weight: 500;
+    color: var(--font-color);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+}
+.nav-btn-style:hover {
+    background-color: var(--bg-hover-color);
+}
+.popover-wrapper {
+    position-anchor: --anchor-dark-mode;
+    position-area: bottom span-left;
+    width: calc(anchor-size(width) * 1.5);
+    margin: 0;
+    border: none;
+    background-color: var(--bg-color-2);
+    border: 1px solid var(--border-color);
+    color: var(--font-color);
+}
+.theme {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: stretch;
+    justify-content: center;
+}
+.popover-btn-style {
+    text-align: left;
+    background-color: var(--bg-color-2);
+    color: var(--font-color);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+.popover-btn-style:hover {
+    background-color: var(--bg-hover-color);
 }
