@@ -202,6 +202,17 @@ const eventsTable = [
             playFart(evilFart);
         }
     },
+    
+    {
+        onCount: 420,
+        action: () => {
+        clickMe.disabled = true;
+        clickMe.innerText("420");
+        playFart(critFart, true)
+        } 
+    },
+ 
+
     {
         onCount: 667,
         action: thatsItForNow,
