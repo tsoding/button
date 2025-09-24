@@ -185,7 +185,7 @@ const eventsTable = [
     },
     {
         onCount: 667,
-        action: regularAction,
+        action: thatsItForNow,
     }
 ];
 
