@@ -1,3 +1,6 @@
+const regularFart    = new Audio("fart-83471-fixed-regular.flac");
+const critFart       = new Audio("fart-4-228244-fixed-crit.flac");
+const countFormatter = new Intl.NumberFormat('en-US', { notation: "compact" });
 const farts = [];
 
 function newFart(url) {
@@ -225,7 +228,8 @@ let counter = 0;               // TODO: DONT FORGET TO SET TO 0 ON RELEASE!!!
 // TODO: change it to onmousedown (it stopped working after separating button and label)
 clickMe.onclick = () => {
     counter += 1;
-    popupText.innerText = counter + "🍑💨";
+    const formattedCount = countFormatter.format(counter);
+    popupText.innerText = `${formattedCount} 🍑💨`;
     fireEvents();
 };
 
