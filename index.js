@@ -14,6 +14,7 @@ function newFart(url) {
 const regularFart = newFart("fart-83471-fixed-regular.flac");
 const critFart    = newFart("fart-4-228244-fixed-crit.flac");
 const bigoneFart  = newFart("fart-paulstretched.flac");
+const evilFart    = newFart("fart-paulstretched-evil.flac");
 
 function randomPlaybackRate(min = 0.97, max = 1.03) {
     return Math.random() * (max - min) + min;
@@ -171,15 +172,38 @@ const eventsTable = [
             clickMeText.innerText = "fart flip!!!!";
             clickMeText.classList.add("rotateText");
 
-            playFart(regularFart, true);
+            playFart(critFart, true);
             setTimeout(() => {
                 clickMeText.classList.remove("rotateText");
                 clickMe.disabled = false;
-            }, 400);
+            }, 600);
         }
     },
     {
         onCount: 121,
+        action: regularAction,
+    },
+    {
+        onCount: 666,
+        action: () => {
+            clickMe.disabled = true;
+            setTimeout(() => {
+                clickMe.disabled = false;
+                critImg.animate([
+                    { opacity: 0 },
+                    { opacity: 1 },
+                    { opacity: 0 }
+                ], {
+                    duration: 1000,
+                    fill: "forwards"
+                });
+            }, 3000);
+            clickMeText.innerText = `😈 BE A SMART FELLA \n NOT A FART SMELLA 😈`;
+            playFart(evilFart);
+        }
+    },
+    {
+        onCount: 667,
         action: thatsItForNow,
     },
 ];
