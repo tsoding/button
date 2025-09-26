@@ -20,207 +20,176 @@ function randomPlaybackRate(min = 0.97, max = 1.03) {
     return Math.random() * (max - min) + min;
 }
 
-function playFart(fart, randomPitch) {
+function flashImage(img, {duration = 1000} = {}) {
+    const keyframes = [{opacity: 0}, {opacity: 1}, {opacity: 0}];
+    const options = {
+        duration,
+        fill: "forwards",
+    };
+    img.animate(keyframes, options);
+}
+
+function playFart(currentFarts, randomPitch) {
     for (const f of farts) {
         f.pause();
         f.currentTime = 0;
     }
 
+    if (currentFarts.length == 0) {
+        return;
+    }
+
+    let fart = currentFarts[Math.floor(Math.random() * currentFarts.length)];
     fart.playbackRate = randomPitch ? randomPlaybackRate() : 1;
     fart.play();
     shaking = true;
 }
 
-const regularAction = () => {
-    clickMeText.innerText = `Congrats! You clicked it ${counter} times!`;
-    playFart(regularFart, true);
-}
-
-const thatsItForNow = () => {
-    clickMeText.innerHTML = `That's it for now!`;
-    playFart(regularFart, true);
-    contrib.style.visibility = "visible";
-}
-
 const eventsTable = [
     {
-        onCount: 0,
-        action: () => {
-            clickMeText.innerText = "Click me!";
-        }
+        onCountExact: 0,
+        text: () => `Click me!`,
+        fartSounds: [ ],
     },
     {
-        onCount: 1,
-        action: () => {
-            clickMeText.innerText = "Gotchu!!";
-            playFart(regularFart, true);
-        }
+        onCountLeast: 1,
+        text: () => `Gotchu!!`,
     },
     {
-        onCount: 4,
-        action: () => {
-            clickMeText.innerText = "Oh, you're into that...";
-            playFart(regularFart, true);
-        },
+        onCountLeast: 4,
+        text: () => `Oh, you're into that...`,
     },
     {
-        onCount: 6,
-        action: () => {
-            clickMeText.innerText = `Oh, you're into that...`;
-            popupText.style.visibility = "visible";
-            playFart(regularFart, true);
-        },
+        onCountLeast: 6,
+        text: () => `Oh, you're into that...`,
+        actionOnce: () => { popupText.style.visibility = "visible"; },
     },
     {
-        onCount: 10,
-        action: () => {
-            clickMe.disabled = true;
-            clickMeText.innerText = `You broke it`;
-            playFart(critFart);
-            critImg.animate([
-                { opacity: 0 },
-                { opacity: 1 },
-                { opacity: 0 }
-            ], {
-                duration: 1000,
-                fill: "forwards"
-            });
-        },
+        onCountExact: 10,
+        text: () => `You broke it`,
+        action: () => flashImage(critImg, { duration: 1000 }),
+        fartSounds: [ critFart ],
     },
     {
-        onCount: 11,
-        action: () => {
-            clickMeText.innerText = `jk keep going`;
-            playFart(regularFart, true);
-        }
+        onCountLeast: 11,
+        text: () => `jk keep going`,
     },
     {
-        onCount: 15,
-        action: () => {
-            clickMeText.innerText = `having fun?`;
+        onCountLeast: 15,
+        text: () => `having fun?`,
+        actionOnce: () => {
             clickMeWrapper.classList.add("customCursor");
             clickMe.classList.add("customCursor");
-            playFart(regularFart, true);
-        }
+        },
     },
     {
-        onCount: 20,
-        action: () => {
-            clickMeText.innerText = `dude this is just a fart button`;
-            playFart(regularFart, true);
-        }
+        onCountLeast: 20,
+        text: () => `dude this is just a fart button`,
     },
     {
-        onCount: 30,
-        action: () => {
-            clickMeText.innerText = `it doesn't do anything, but farts`;
-            playFart(regularFart, true);
-        }
+        onCountLeast: 30,
+        text: () => `it doesn't do anything, but farts`,
     },
     {
-        onCount: 40,
-        action: () => {
-            clickMeText.innerText = `you are not getting anything for clicking it`;
-            playFart(regularFart, true);
-        }
+        onCountLeast: 40,
+        text: () => `you are not getting anything for clicking it`,
     },
     {
-        onCount: 50,
-        action: regularAction,
+        onCountLeast: 50,
+        text: () => `Congrats! You clicked it ${counter} times!`,
     },
     {
-        onCount: 69,
+        onCountExact: 69,
+        text: () => `Nice!`,
         action: () => {
             // TODO: add this sound here https://www.youtube.com/watch?v=3WAOxKOmR90
             clickMe.disabled = true;
-            clickMeText.innerText = `Nice!`;
-            playFart(critFart);
-        }
+        },
+        randomPitch: false,
+        fartSounds: [ critFart ],
     },
     {
-        onCount: 70,
-        action: regularAction,
-    },
-    {
-        onCount: 100,
+        onCountExact: 100,
+        text: () => `HERE COMES THE BIG ONE`,
         action: () => {
             clickMe.disabled = true;
             setTimeout(() => {
                 clickMe.disabled = false;
-                critImg.animate([
-                    { opacity: 0 },
-                    { opacity: 1 },
-                    { opacity: 0 }
-                ], {
-                    duration: 1000,
-                    fill: "forwards"
-                });
+                flashImage(critImg, { duration: 1000 });
             }, 3000);
-            clickMeText.innerText = `HERE COMES THE BIG ONE`;
-            playFart(bigoneFart);
-        }
+        },
+        randomPitch: false,
+        fartSounds: [ bigoneFart ],
     },
     {
-        onCount: 101,
-        action: regularAction,
-    },
-    {
-        onCount: 120,
+        onCountExact: 120,
+        text: () => "fart flip!!!!",
         action: () => {
             clickMe.disabled = true;
-
-            clickMeText.innerText = "fart flip!!!!";
             clickMeText.classList.add("rotateText");
 
-            playFart(critFart, true);
             setTimeout(() => {
                 clickMeText.classList.remove("rotateText");
                 clickMe.disabled = false;
             }, 600);
-        }
+        },
+        fartSounds: [ critFart ],
+        randomPitch: false,
     },
     {
-        onCount: 121,
-        action: regularAction,
-    },
-    {
-        onCount: 666,
+        onCountExact: 666,
+        text: () => `😈 BE A SMART FELLA \n NOT A FART SMELLA 😈`,
         action: () => {
             clickMe.disabled = true;
             setTimeout(() => {
                 clickMe.disabled = false;
-                critImg.animate([
-                    { opacity: 0 },
-                    { opacity: 1 },
-                    { opacity: 0 }
-                ], {
-                    duration: 1000,
-                    fill: "forwards"
-                });
+                flashImage(critImg, { duration: 1000 });
             }, 3000);
-            clickMeText.innerText = `😈 BE A SMART FELLA \n NOT A FART SMELLA 😈`;
-            playFart(evilFart);
-        }
+        },
+        fartSounds: [ evilFart ],
     },
     {
-        onCount: 667,
-        action: thatsItForNow,
+        onCountLeast: 667,
+        text: () => `That's it for now!`,
+        actionOnce: () => {
+            contrib.style.visibility = "visible";
+        },
     },
 ];
 
 eventsTable.sort((a, b) => b.onCount - a.onCount);
-
-function fireEvents() {
-    for (const event of eventsTable) {
-        if (event.onCount <= counter) {
-            event.action();
-            break;
-        }
+for (const event of eventsTable) {
+    if (event.fartSounds === undefined) {
+        event.fartSounds = [ regularFart ];
+        event.randomPitch = true;
     }
 }
 
+function fireEvents() {
+    let event;
+    for (const e of eventsTable) {
+        if (e.onCountExact == counter) {
+            event = e;
+            break;
+        } else if (e.onCountLeast <= counter) {
+            event = e;
+        }
+    }
+
+    clickMeText.innerText = event.text();
+    if (event.actionOnce !== undefined) {
+        event.actionOnce();
+        event.actionOnce = undefined;
+    }
+
+    if (event.action !== undefined) {
+        event.action();
+    }
+    playFart(event.fartSounds, event.randomPitch);
+}
+
 let shaking = false;
-let counter = 0;               // TODO: DONT FORGET TO SET TO 0 ON RELEASE!!!
+let counter = 0;
 
 // TODO: change it to onmousedown (it stopped working after separating button and label)
 clickMe.onclick = () => {
